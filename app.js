@@ -2,6 +2,7 @@ const express = require('express');
 
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
+const path = require('path');
 
 const DB = require('./DB/connect');
 
@@ -18,6 +19,8 @@ app.use((req, res, next) => {
   
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
